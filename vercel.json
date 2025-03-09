@@ -1,6 +1,6 @@
 {
 	"version": 2,
-	"buildCommand": "bun run vercel-build",
+	"buildCommand": "bun run build:vercel",
 	"installCommand": "bun install",
 	"framework": "svelte",
 	"outputDirectory": ".vercel/output/static",

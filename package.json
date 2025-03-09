@@ -17,7 +17,7 @@
 		"clean": "rimraf .svelte-kit build node_modules/.vite package-lock.json node_modules",
 		"prebuild": "npm run clean",
 		"reinstall": "npm run clean && npm install",
-		"build:vercel": "vite build && cp -r build/* .vercel/output/static/"
+		"build:vercel": "vite build && node scripts/copy-build-to-vercel.js"
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.4.1",
