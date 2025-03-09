@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"vercel-build": "vite build && node scripts/copy-build-to-vercel.js",
+		"vercel-build": "vite build",
 		"generate:static": "npx @sveltejs/kit sync && vite build --ssr",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -14,7 +14,8 @@
 		"format": "prettier --write .",
 		"prepare": "git init && husky",
 		"start": "node build/index.js",
-		"clean": "rimraf .svelte-kit build node_modules/.vite package-lock.json",
+		"clean": "rimraf .svelte-kit build node_modules/.vite package-lock.json node_modules",
+		"prebuild": "npm run clean",
 		"reinstall": "npm run clean && npm install"
 	},
 	"devDependencies": {

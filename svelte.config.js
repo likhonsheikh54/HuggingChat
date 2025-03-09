@@ -33,6 +33,7 @@ const config = {
 			runtime: "edge",
 			regions: ["fra1"],
 			split: false,
+			edge: true,
 		}),
 
 		paths: {
