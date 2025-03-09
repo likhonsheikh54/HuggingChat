@@ -1,52 +1,49 @@
-/**
- * Script to copy build files to Vercel output directory
- * Cross-platform alternative to 'cp -r build/* .vercel/output/static/'
- */
-
+// This script copies the build output to the directory expected by Vercel
 const fs = require('fs');
 const path = require('path');
 
-// Source and destination paths
-const sourcePath = path.resolve(__dirname, '../build');
-const destPath = path.resolve(__dirname, '../.vercel/output/static');
+// Source and destination directories
+const srcDir = path.join(__dirname, '..', '.svelte-kit', 'output');
+const destDir = path.join(__dirname, '..', '.vercel', 'output');
 
-// Ensure destination directory exists
-if (!fs.existsSync(destPath)) {
-  fs.mkdirSync(destPath, { recursive: true });
-}
+function copyFolderRecursiveSync(source, destination) {
+  // Check if source exists
+  if (!fs.existsSync(source)) {
+    console.error(`Source directory not found: ${source}`);
+    process.exit(1);
+  }
 
-/**
- * Copy directory recursively
- * @param {string} src - Source path
- * @param {string} dest - Destination path
- */
-function copyDir(src, dest) {
-  // Get all files and directories in the source directory
-  const entries = fs.readdirSync(src, { withFileTypes: true });
+  // Create destination directory if it doesn't exist
+  if (!fs.existsSync(destination)) {
+    fs.mkdirSync(destination, { recursive: true });
+    console.log(`Created directory: ${destination}`);
+  }
 
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
+  // Get all files and directories in the source
+  const files = fs.readdirSync(source);
 
-    if (entry.isDirectory()) {
-      // Create directory if it doesn't exist
-      if (!fs.existsSync(destPath)) {
-        fs.mkdirSync(destPath, { recursive: true });
-      }
-      // Recursively copy subdirectory
-      copyDir(srcPath, destPath);
+  // Copy each file/directory
+  files.forEach(file => {
+    const sourcePath = path.join(source, file);
+    const destinationPath = path.join(destination, file);
+
+    const stats = fs.statSync(sourcePath);
+
+    if (stats.isDirectory()) {
+      // Recursively copy subdirectories
+      copyFolderRecursiveSync(sourcePath, destinationPath);
     } else {
       // Copy file
-      fs.copyFileSync(srcPath, destPath);
+      fs.copyFileSync(sourcePath, destinationPath);
+      console.log(`Copied file: ${sourcePath} -> ${destinationPath}`);
     }
-  }
+  });
 }
 
-try {
-  console.log(`Copying build files from ${sourcePath} to ${destPath}...`);
-  copyDir(sourcePath, destPath);
-  console.log('Successfully copied build files to Vercel output directory');
-} catch (error) {
-  console.error('Error copying build files:', error);
-  process.exit(1);
-}
+console.log('Starting build output copy process for Vercel deployment...');
+console.log(`Source: ${srcDir}`);
+console.log(`Destination: ${destDir}`);
+
+copyFolderRecursiveSync(srcDir, destDir);
+
+console.log('Build output successfully copied to Vercel directory!');

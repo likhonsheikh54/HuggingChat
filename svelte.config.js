@@ -2,6 +2,7 @@ import adapter from "@sveltejs/adapter-vercel";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import dotenv from "dotenv";
 import { execSync } from "child_process";
+import { createRequire } from 'module';
 
 dotenv.config({ path: "./.env.local" });
 dotenv.config({ path: "./.env" });
@@ -18,6 +19,9 @@ function getCurrentCommitSHA() {
 process.env.PUBLIC_VERSION ??= process.env.npm_package_version;
 process.env.PUBLIC_COMMIT_SHA ??= getCurrentCommitSHA();
 
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
@@ -27,7 +31,7 @@ const config = {
 	kit: {
 		adapter: adapter({
 			runtime: "edge",
-			regions: ["iad1"],
+			regions: ["fra1"],
 			split: false,
 		}),
 
