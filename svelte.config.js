@@ -26,10 +26,9 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			runtime: 'nodejs18.x',
-			edge: false,
+			runtime: "edge",
+			regions: ["iad1"],
 			split: false,
-			precompress: true
 		}),
 
 		paths: {
