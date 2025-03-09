@@ -1,9 +1,13 @@
 {
   "version": 2,
+  "framework": "svelte",
+  "buildCommand": "bun run build",
+  "installCommand": "bun install --frozen-lockfile",
+  "regions": ["iad1"],
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/node"
+      "use": "@vercel/node@3"
     }
   ],
   "routes": [
@@ -12,7 +16,6 @@
       "dest": "/"
     }
   ],
-  "regions": ["iad1"],
   "github": {
     "enabled": true,
     "silent": true

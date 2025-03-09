@@ -16,6 +16,7 @@ import { initExitHandler } from "$lib/server/exitHandler";
 import { ObjectId } from "mongodb";
 import { refreshAssistantsCounts } from "$lib/jobs/refresh-assistants-counts";
 import { refreshConversationStats } from "$lib/jobs/refresh-conversation-stats";
+import { initCronJobs } from '$lib/server/cron';
 
 // TODO: move this code on a started server hook, instead of using a "building" flag
 if (!building) {
@@ -36,6 +37,9 @@ if (!building) {
 
 	// Init AbortedGenerations refresh process
 	AbortedGenerations.getInstance();
+
+	// Initialize cron jobs when server starts
+	initCronJobs();
 
 	if (env.EXPOSE_API) {
 		logger.warn(
