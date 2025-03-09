@@ -17,3 +17,8 @@ gcp-*.json
 .cloudflare
 dist
 .env*.local
+.svelte-kit/
+.vercel/
+.wrangler/
+dist/
+build/
