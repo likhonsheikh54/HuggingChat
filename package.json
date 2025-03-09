@@ -5,17 +5,18 @@
 	"packageManager": "bun@1.0.30",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && bun run build:vercel",
-		"vercel-build": "bun run build",
+		"build": "vite build",
+		"vercel-build": "node -v && npm i vite && vite build",
 		"generate:static": "npx @sveltejs/kit sync && vite build --ssr",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"prepare": "git init && husky",
-		"start": "bun run build/index.js",
-		"clean": "rimraf .svelte-kit build node_modules/.vite",
+		"start": "node build/index.js",
+		"clean": "rimraf .svelte-kit build node_modules/.vite package-lock.json node_modules",
 		"prebuild": "npm run clean",
+		"reinstall": "npm run clean && npm install",
 		"build:vercel": "vite build && cp -r build/* .vercel/output/static/"
 	},
 	"devDependencies": {
