@@ -1,22 +1,16 @@
 {
   "version": 2,
+  "buildCommand": "bun run build",
+  "installCommand": "bun install",
   "framework": "svelte",
-  "buildCommand": "npm run vercel-build",
-  "outputDirectory": ".svelte-kit/output",
-  "installCommand": "npm install", 
+  "outputDirectory": ".vercel/output/static",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "zeroConfig": true
-      }
+      "src": "build/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
-    {
-      "handle": "filesystem"
-    },
     {
       "src": "/(.*)",
       "dest": "/index.html"

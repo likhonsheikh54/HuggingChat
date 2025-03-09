@@ -5,15 +5,18 @@
 	"packageManager": "bun@1.0.30",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
-		"vercel-build": "vite build && npm run generate:static",
+		"build": "vite build && bun run build:vercel",
+		"vercel-build": "bun run build",
 		"generate:static": "npx @sveltejs/kit sync && vite build --ssr",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"prepare": "git init && husky",
-		"start": "bun run build/index.js"
+		"start": "bun run build/index.js",
+		"clean": "rimraf .svelte-kit build node_modules/.vite",
+		"prebuild": "npm run clean",
+		"build:vercel": "vite build && cp -r build/* .vercel/output/static/"
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.4.1",
@@ -117,7 +120,9 @@
 		"tailwind-scrollbar": "^3.0.0",
 		"tailwindcss": "^3.4.0",
 		"uuid": "^10.0.0",
-		"zod": "^3.22.3"
+		"zod": "^3.22.3",
+		"@vitejs/plugin-react": "^4.2.1",
+		"@vercel/node": "^3.0.17"
 	},
 	"optionalDependencies": {
 		"@anthropic-ai/sdk": "^0.32.1",
