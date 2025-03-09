@@ -1,0 +1,19 @@
+name = "huggingchat"
+type = "javascript"
+workers_dev = true
+compatibility_date = "2024-03-09"
+
+[build]
+command = "npm run cloudflare-build"
+watch_dir = "src"
+
+[site]
+bucket = ".vercel/output/static"
+entry-point = ".vercel/output/static/server/index.js"
+
+[env.production]
+route = "huggingchat.com/*"
+zone_id = ""
+
+[env.staging]
+route = "staging.huggingchat.com/*"

@@ -13,3 +13,7 @@ SECRET_CONFIG
 !.env
 gcp-*.json
 .vercel
+.wrangler
+.cloudflare
+dist
+.env*.local

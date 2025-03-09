@@ -1,23 +1,22 @@
 {
   "version": 2,
+  "buildCommand": "npm run vercel-build",
+  "installCommand": "npm install",
   "framework": "svelte",
-  "buildCommand": "bun run build",
-  "installCommand": "bun install --frozen-lockfile",
-  "regions": ["iad1"],
+  "outputDirectory": ".vercel/output/static",
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/node@3"
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
+      "handle": "filesystem"
+    },
+    {
       "src": "/(.*)",
       "dest": "/"
     }
-  ],
-  "github": {
-    "enabled": true,
-    "silent": true
-  }
+  ]
 }
