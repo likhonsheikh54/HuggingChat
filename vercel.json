@@ -1,7 +1,8 @@
 {
 	"version": 2,
+	"framework": "sveltekit",
 	"buildCommand": "npm run vercel-build",
 	"installCommand": "npm install",
-	"framework": "svelte",
-	"outputDirectory": ".vercel/output/static"
+	"regions": ["fra1"],
+	"ignoreCommand": "git diff --quiet HEAD^ HEAD ./"
 }
