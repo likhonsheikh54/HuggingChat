@@ -11,5 +11,10 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ]
+  ],
+  "regions": ["iad1"],
+  "github": {
+    "enabled": true,
+    "silent": true
+  }
 }
