@@ -5,7 +5,7 @@
 	"packageManager": "npm@9.5.0",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "npm run build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -14,7 +14,8 @@
 		"test": "vitest",
 		"updateLocalEnv": "node --loader ts-node/esm scripts/updateLocalEnv.ts",
 		"populate": "vite-node --options.transformMode.ssr='/.*/' scripts/populate.ts",
-		"prepare": "husky"
+		"prepare": "husky",
+		"start": "node build/index.js"
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.4.1",
