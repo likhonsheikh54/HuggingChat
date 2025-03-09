@@ -1,19 +1,19 @@
 {
-  "version": 2,
-  "buildCommand": "npm run vercel-build",
-  "framework": "svelte",
-  "installCommand": "npm install",
-  "outputDirectory": ".vercel/output/static",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ]
+	"version": 2,
+	"buildCommand": "bun run vercel-build",
+	"installCommand": "bun install",
+	"framework": "svelte",
+	"outputDirectory": ".vercel/output/static",
+	"builds": [
+		{
+			"src": "package.json",
+			"use": "@vercel/static-build"
+		}
+	],
+	"routes": [
+		{
+			"src": "/(.*)",
+			"dest": "/"
+		}
+	]
 }
